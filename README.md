@@ -1,6 +1,6 @@
-# Sketchy (Go Version)
+# Sketchy
 
-**A comprehensive security scanner for folks who `git clone` first and ask questions later.**
+**A tool for folks who `git clone` first and ask questions later.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
@@ -16,7 +16,7 @@ You know how it goes. You find a repo that probably solves your problem. It has 
 **Your brain:** *"This is probably fine."*  
 **Also your brain:** *"But remember that time PyTorch got supply chain attacked?"*  
 **You:** *"That won't happen to me."*  
-**Narrator:** *"It could absolutely happen."*
+**Narrator:** *"It absolutely could"*
 
 `sketchy` is a fast, cross-platform security scanner that checks for the obvious (and not-so-obvious) signs that a package, repo, or script might be trying to ruin your day.
 
@@ -150,8 +150,8 @@ sketchy -path ./repo || echo "Found $? security issues"
 
 ## License
 
-MIT - Same as the bash version
+MIT
 
 ## Credits
 
-- Detection patterns inspired by [DataDog's GuardDog](https://github.com/DataDog/guarddog) (Apache 2.0)
+- Detection patterns inspired by [DataDog's GuardDog](https://github.com/DataDog/guarddog)
