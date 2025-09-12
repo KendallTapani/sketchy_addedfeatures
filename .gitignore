@@ -1,0 +1,68 @@
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.*.swp
+.*.swo
+
+# Report files
+sketchy_report_*.txt
+*.report
+*.log
+scan_results/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+.project
+.classpath
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+build/
+bin/
+dist/
+out/
+target/
+*.o
+*.exe
+*.dll
+
+# Backup files
+*.bak
+*.backup
+*.old
+.backup/
+
+# Cache
+.cache/
+*.cache
+
+# Local configuration
+.env
+.env.local
+*.local
+config.local.*

