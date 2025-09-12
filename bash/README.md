@@ -197,10 +197,7 @@ make test
 ## FAQ
 
 **Q: Should I trust this tool?**  
-A: You shouldn't trust anything, really. But the source is readable Go - audit it in 10 minutes.
-
-**Q: Why Go instead of bash?**  
-A: Cross-platform. No dependencies. 10x faster. Single binary. But the bash version still exists if you prefer it!
+A: You shouldn't trust anything, really. But the source is readable - audit it in 10 minutes.
 
 **Q: It found malware, now what?**  
 A: Delete it. Report it. Thank sketchy. Star this repo.
@@ -210,13 +207,3 @@ A: Please report it! We're always improving detection patterns.
 
 **Q: Is this paranoid?**  
 A: npm had 1,300+ malicious packages in 2021 alone. PyPI, RubyGems, and others have similar issues. Is it really paranoia if they're actually out to get you?
-
----
-
-<p align="center">
-  Made with ☕ and healthy paranoia by devs who've been burned before.<br>
-  <br>
-  ⭐ Star this repo if it saved you from malware<br>
-  💬 Open an issue if you got hacked anyway<br>
-  🔍 Stay sketchy, my friends
-</p>

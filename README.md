@@ -18,7 +18,7 @@ You know how it goes. You find a repo that probably solves your problem. It has 
 **You:** *"That won't happen to me."*  
 **Narrator:** *"It absolutely could"*
 
-`sketchy` is a fast, cross-platform security scanner that checks for the obvious (and not-so-obvious) signs that a package, repo, or script might be trying to ruin your day.
+`sketchy` is a fast, cross-platform security scanner that checks for the obvious (and not-so-obvious) signs that a package, repo, or script might be trying to ruin your day. But you should read the fine print.
 
 ## Installation
 
@@ -62,7 +62,7 @@ sketchy -medium-up -path /path/to/repo
 sketchy -help
 ```
 
-## Output Example
+## Output
 
 ```
 🔍 Scanning: ./suspicious-repo
@@ -80,14 +80,11 @@ MEDIUM RISK Base64 decoding detected - base64
   Preview: decoded = base64.b64decode(encoded_payload)
 
 ================================
-⚠️  Scan complete. Found 3 potential issue(s).
+Scan complete. Found 3 potential issue(s).
 ```
 
 ## Detections
 
-The Go version includes all detection patterns from the bash version:
-
-### High Risk
 - Command overwrites
 - Code execution (exec, eval, etc.)
 - Download and execute patterns
@@ -97,8 +94,6 @@ The Go version includes all detection patterns from the bash version:
 - Credential theft (SSH, AWS, browser cookies)
 - Git credential harvesting
 - Database credential access
-
-### Medium Risk
 - Base64 decoding
 - Time-based triggers
 - Dynamic imports
@@ -107,12 +102,8 @@ The Go version includes all detection patterns from the bash version:
 - Docker socket access
 - Anti-debugging techniques
 - VM detection
-
-### Low Risk
 - URL string concatenation
 - Hidden file operations
-
-### Special Detections
 - Bidirectional Unicode characters (invisible code)
 - Cyrillic characters (homograph attacks)
 - Non-ASCII characters
@@ -148,10 +139,23 @@ This makes it easy to use in CI/CD pipelines:
 sketchy -path ./repo || echo "Found $? security issues"
 ```
 
-## License
+## Fine print
 
-MIT
+- **License**: MIT
+- **Warranty**: None. This is free software.
+- **Attribution**: Detection patterns inspired by [DataDog's GuardDog](https://github.com/DataDog/guarddog) (Apache 2.0)
+- **Limitations**: Can't detect everything. Won't replace common sense. Some false positives. Some false negatives. Tool created slightly in jest. AI involved. YMMV.
 
-## Credits
+## FAQ
 
-- Detection patterns inspired by [DataDog's GuardDog](https://github.com/DataDog/guarddog)
+**Q: Should I trust this tool?**  
+A: You shouldn't trust anything, really. But the source is readable - audit it in 10 minutes.
+
+**Q: It found malware, now what?**  
+A: Delete it. Report it. Thank sketchy. Star this repo.
+
+**Q: I found malware and sketchy didn't catch it.**  
+A: Please report it! We're always improving detection patterns.
+
+**Q: Is this paranoid?**  
+A: npm, PyPI, RubyGems, and others keep finding malicious packages that lead to real breaches. Is it really paranoia if they're actually out to get you?
