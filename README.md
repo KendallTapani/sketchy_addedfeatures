@@ -1,4 +1,4 @@
-New Features in This Version
+**New Features in This Version
 This document describes the features and improvements added to sketchy beyond the original version.
 
 Comparison to Original
@@ -23,7 +23,7 @@ I mainly wanted the cloning hook but got carried away, this version adds:
 ✅ Category filtering (new)
 
 ✅ Improved code quality (refactored)
-
+**
 
 
 # 🔍 sketchy
