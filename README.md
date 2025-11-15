@@ -15,6 +15,7 @@ I mainly wanted the cloning hook but got carried away, this version adds:
 ✅ Category filtering (new)
 ✅ Improved code quality (refactored)
 
+
 # 🔍 sketchy
 
 **A comprehensive security scanner for folks who `git clone` first and ask questions later.**
