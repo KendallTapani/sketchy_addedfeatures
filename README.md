@@ -1,10 +1,6 @@
-# New Features in This Version
-
-This document describes the features and improvements added to sketchy beyond the original version.
-
 ## Comparison to Original
 
-I mainly wanted the cloning hook but got carried away, this version adds:
+I mainly wanted to add the cloning hook to this tool but got carried away, this version adds:
 
 ✅ **60+ detection patterns (Mainly Windows stuff)** (vs ~20 in original)  
 ✅ **Git hook integration** (new)  
