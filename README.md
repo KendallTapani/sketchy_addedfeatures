@@ -1,3 +1,20 @@
+New Features in This Version
+This document describes the features and improvements added to sketchy beyond the original version.
+
+Comparison to Original
+I mainly wanted the cloning hook but got carried away, this version adds:
+
+✅ 60+ detection patterns (Mainly Windows stuff) (vs ~20 in original)
+✅ Git hook integration (new)
+✅ Advanced filtering (new)
+✅ .sketchyignore support (new)
+✅ Windows-specific patterns (new)
+✅ Cloud/container patterns (new)
+✅ CI/CD workflow detection (new)
+✅ Pattern statistics (new)
+✅ Category filtering (new)
+✅ Improved code quality (refactored)
+
 # 🔍 sketchy
 
 **A comprehensive security scanner for folks who `git clone` first and ask questions later.**
