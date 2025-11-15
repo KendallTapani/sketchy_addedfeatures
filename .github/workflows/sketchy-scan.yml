@@ -1,0 +1,56 @@
+name: Security Scan with Sketchy
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  # Uncomment the line below to run on every workflow_dispatch (manual trigger)
+  # workflow_dispatch:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Run Sketchy Security Scanner
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Download sketchy
+      run: |
+        curl -L https://github.com/adversis/sketchy/releases/latest/download/sketchy-linux-amd64 -o sketchy
+        chmod +x sketchy
+        
+    - name: Run security scan
+      id: scan
+      continue-on-error: true
+      working-directory: ./sketchy
+      run: |
+        # Use the built executable or download if needed
+        if [ -f "./sketchy.exe" ]; then
+          ./sketchy.exe -path . > scan-results.txt 2>&1
+        elif [ -f "./sketchy" ]; then
+          ./sketchy -path . > scan-results.txt 2>&1
+        else
+          curl -L https://github.com/adversis/sketchy/releases/latest/download/sketchy-linux-amd64 -o sketchy
+          chmod +x sketchy
+          ./sketchy -path . > scan-results.txt 2>&1
+        fi
+        SCAN_EXIT=$?
+        echo "exit_code=$SCAN_EXIT" >> $GITHUB_OUTPUT
+        cat scan-results.txt
+        
+    - name: Upload scan results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-scan-results
+        path: scan-results.txt
+        
+    - name: Fail if issues found
+      if: steps.scan.outputs.exit_code != '0'
+      run: |
+        echo "❌ Security scan found issues. Check the scan results above."
+        exit 1
+
