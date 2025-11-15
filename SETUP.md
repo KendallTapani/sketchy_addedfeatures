@@ -18,7 +18,7 @@ When prompted, type `y` to install the git hook, then choose option `2` (Global)
 After installation, run the command shown (it will look like this):
 
 ```bash
-git config --global init.templateDir ~/.git-template
+git config --global init.templateDir C:\Users\kenda\.git-template
 ```
 
 ### 3. Test the Hook
@@ -34,24 +34,12 @@ You should see sketchy run automatically after the clone completes!
 
 ## Manual Hook Installation
 
-If you skipped the prompt:
+If you skipped the prompt, you can install the hook manually:
 
 ```bash
 cd sketchy
 .\sketchy.exe install-hook
 ```
 
-Choose option `2` (Global), then run the git config command shown.
+Choose option `2` for global installation (recommended).
 
-## Test Scanning
-
-```bash
-cd sketchy
-.\sketchy.exe -path test-files/test
-```
-
-Should find 60+ issues.
-
-## That's It!
-
-Your setup is complete. The hook will now automatically scan all repositories you clone.

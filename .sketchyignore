@@ -1,0 +1,6 @@
+.git/hooks/
+node_modules/
+test/
+bash/test-files
+*.log
+*.md

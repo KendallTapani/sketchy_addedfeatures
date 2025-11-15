@@ -1,0 +1,64 @@
+# .sketchyignore - Example file
+# This file tells sketchy to skip certain files/directories during scanning
+# Similar to .gitignore format
+
+Comments: Lines starting with #
+Directory patterns: Patterns ending with / match entire directories
+Glob patterns: Use * and ? wildcards
+Negation: Use ! prefix to un-ignore files
+
+# Skip entire directories
+node_modules/
+vendor/
+dist/
+build/
+.venv/
+__pycache__/
+
+# Skip specific file patterns
+*.log
+*.min.js
+*.min.css
+*.map
+
+# Skip test files (but you can override with negation)
+test/
+!test/test_security.py  # But scan this important test file
+
+# Skip common build artifacts
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Skip package lock files (usually safe)
+package-lock.json
+yarn.lock
+poetry.lock
+
+# Skip documentation
+docs/
+*.md
+!README.md  # But scan README files
+
+# Skip temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+
+
+
+
+
+
+
+How it works:
+File location: The scanner searches for .sketchyignore starting from the scan directory and walks up to the repository root (similar to .gitignore).
+
+Pattern matching: Patterns are checked against file paths using glob matching.
+
+Priority: Negation patterns (!) override ignore patterns.
+
+Integration: Files matching ignore patterns are skipped before other checks.
